@@ -62,9 +62,9 @@ endif()
 
 
 target_compile_features(roman_converter_lib
-    PRIVATE
-    cxx_auto_type
+    PUBLIC
     cxx_std_14
+    cxx_auto_type
     )
 
 # Coverage instrumentation

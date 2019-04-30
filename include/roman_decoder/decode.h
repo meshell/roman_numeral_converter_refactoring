@@ -5,11 +5,12 @@
 #include <memory>
 #include <map>
 #include <ciso646>
+#include <algorithm>
 
 namespace roman_numerals {
 
-template<class T>
-struct RomanDecoder {
+template<class Validator>
+struct RomanDecoder: Validator {
     uint32_t decode(std::string const & roman) const {
         std::map<char, int32_t> const to_arabic_mapping =
         {
@@ -24,8 +25,7 @@ struct RomanDecoder {
 
         auto arabic = 0;
         auto prev = 0;
-        T const validator{};
-        if (not validator.is_valid(roman)) {
+        if (not this->is_valid(roman)) {
             throw std::invalid_argument{ "Invalid string provided" };
         }
 
