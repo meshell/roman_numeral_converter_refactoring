@@ -2,3 +2,5 @@
 third_party/
 bin/
 \.vs/
+reports/
+*.json

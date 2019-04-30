@@ -1,14 +1,12 @@
 #ifndef ENCODE_H_
 #define ENCODE_H_
 
-#include "encoder_interface.h"
 #include <string>
 
 namespace roman_numerals {
 
-class RomanEncoder final: public IEncoder{
-public:
-    std::string encode(uint32_t arabic) final;
+struct RomanEncoder{
+    std::string encode(uint32_t arabic) const;
 };
 
 } // namespace roman_numerals

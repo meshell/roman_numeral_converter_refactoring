@@ -1,13 +1,12 @@
 #ifndef ROMAN_NUMERAL_VALIDATER_H_
 #define ROMAN_NUMERAL_VALIDATER_H_
 
-#include "validator_interface.h"
 #include <string>
 
 namespace roman_numerals {
-class RomanNumberValidator final: public IValidator {
+class RomanNumberValidator {
 public:
-    bool is_valid(const std::string& roman) final;
+    bool is_valid(std::string const & roman) const;
 };
 
 

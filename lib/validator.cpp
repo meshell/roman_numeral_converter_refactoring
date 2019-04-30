@@ -8,7 +8,7 @@ namespace roman_numerals {
 
 namespace {
 
-const std::map<char, uint32_t> to_arabic_mapping =
+std::map<char, int32_t> const to_arabic_mapping =
         {
                 {'M', 1000},
                 {'D', 500},
@@ -19,10 +19,10 @@ const std::map<char, uint32_t> to_arabic_mapping =
                 {'I', 1}
         };
 
-const std::array<char, 3> five_x_digits = {{'D', 'L', 'V'}};
+std::array<char, 3> const five_x_digits = {{'D', 'L', 'V'}};
 
-bool check_DLV_occurs_maximal_once(const std::string& roman) {
-    for (const auto& digit : five_x_digits) {
+bool check_DLV_occurs_maximal_once(std::string const & roman) {
+    for (auto const & digit : five_x_digits) {
         if (std::count(roman.begin(), roman.end(), digit) > 1) {
             return false;
         }
@@ -31,7 +31,7 @@ bool check_DLV_occurs_maximal_once(const std::string& roman) {
 }
 
 bool check_valid_digits(const std::string& roman) {
-    for (const auto& numeral: roman) {
+    for (auto const & numeral: roman) {
         if (to_arabic_mapping.count(numeral) == 0) {
             return false;
         };
@@ -39,10 +39,10 @@ bool check_valid_digits(const std::string& roman) {
     return true;
 }
 
-bool check_max_consecutive_equals(const std::string& roman) {
+bool check_max_consecutive_equals(std::string const & roman) {
     char prev_numeral = '\0';
     auto count_consecutive_equals = 1u;
-    for (const auto& numeral: roman) {
+    for (auto const & numeral: roman) {
         if (numeral == prev_numeral) {
             ++count_consecutive_equals;
             if (count_consecutive_equals == 10) {
@@ -56,14 +56,14 @@ bool check_max_consecutive_equals(const std::string& roman) {
     return true;
 }
 
-bool check_sum_smaller_denominations(const std::string& roman) {
-    auto prev = 0u;
+bool check_sum_smaller_denominations(std::string const & roman) {
+    auto prev = 0;
     auto roman_reverse = roman;
-    auto arabic = 0u;
+    auto arabic = 0;
     std::reverse(roman_reverse.begin(), roman_reverse.end());
     auto next_decimal = to_arabic_mapping.at(roman_reverse.at(0)) * 10;
-    for (const auto& numeral: roman_reverse) {
-        const auto inc = to_arabic_mapping.at(numeral);
+    for (auto const & numeral: roman_reverse) {
+        auto const inc = to_arabic_mapping.at(numeral);
         if (inc >= next_decimal) {
             arabic = 0;
             next_decimal = inc % next_decimal == 0 ? inc * 10 : inc + inc;
@@ -78,12 +78,12 @@ bool check_sum_smaller_denominations(const std::string& roman) {
 }
 
 
-bool check_ordering(const std::string& roman) {
-    auto prev = 0u;
+bool check_ordering(std::string const & roman) {
+    auto prev = 0;
     auto roman_reverse = roman;
     std::reverse(roman_reverse.begin(), roman_reverse.end());
-    for (const auto& numeral: roman_reverse) {
-        const auto inc = to_arabic_mapping.at(numeral);
+    for (auto const & numeral: roman_reverse) {
+        auto const inc = to_arabic_mapping.at(numeral);
         if ((inc < prev) && ((prev - inc) > (10 * inc))) {
             return false;
         }
@@ -93,7 +93,7 @@ bool check_ordering(const std::string& roman) {
 }
 } // namespace
 
-bool RomanNumberValidator::is_valid(const std::string& roman) {
+bool RomanNumberValidator::is_valid(std::string const & roman) const {
 
     if (roman.empty()) {
         return true;

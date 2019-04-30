@@ -23,7 +23,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../cmake)
 # Build library
 add_library(roman_converter_lib STATIC
     encode.cpp
-    decode.cpp
     validator.cpp
     )
 
@@ -50,7 +49,7 @@ endif(NOT MSVC)
 
 target_compile_options(roman_converter_lib
     PRIVATE
-    $<$<BOOL:${MSVC}>:/analyze;/W4>
+    $<$<BOOL:${MSVC}>:/analyze>
     )
 
 if(CLANG_TIDY_EXE AND NOT CMAKE_COMPILER_IS_GNUCXX)

@@ -7,8 +7,8 @@ using namespace std::string_literals;
 
 namespace roman_numerals {
 
-std::string RomanEncoder::encode(uint32_t arabic) {
-    const std::array<std::pair<uint32_t, const char*>, 13> to_roman_mapping =
+std::string RomanEncoder::encode(uint32_t arabic) const {
+    std::array<std::pair<uint32_t, char const *>, 13> const to_roman_mapping =
             {{
                      std::make_pair(1000, "M"),
                      std::make_pair(900, "CM"),
@@ -26,12 +26,10 @@ std::string RomanEncoder::encode(uint32_t arabic) {
              }};
 
     auto roman = ""s;
-    for (const auto& mapping : to_roman_mapping) {
-        const auto divisor = mapping.first;
-        const auto roman_digit = mapping.second;
-        while (arabic >= divisor) {
-            roman += roman_digit;
-            arabic -= divisor;
+    for (auto const & kvp : to_roman_mapping) {
+        while (arabic >= kvp.first) {
+            roman += kvp.second;
+            arabic -= kvp.first;
         }
     }
 

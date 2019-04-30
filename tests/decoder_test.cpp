@@ -4,9 +4,11 @@
 
 namespace {
 
+    using namespace roman_numerals;
+
 class RomanDecoderTestsFixture {
 protected:
-    roman_numerals::RomanDecoder decoder{std::move(std::unique_ptr<IValidator>{new roman_numerals::RomanNumberValidator{}})};
+    RomanDecoder<RomanNumberValidator> decoder{};
 };
 
 TEST_CASE_METHOD(RomanDecoderTestsFixture, "A roman numbers decoder can decode I - III to 1 - 3", "[decoder]") {
