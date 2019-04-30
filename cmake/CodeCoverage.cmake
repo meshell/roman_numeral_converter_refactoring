@@ -95,7 +95,7 @@ if(NOT GCOV_PATH)
     set(Coverage_FOUND FALSE)
 endif() # NOT GCOV_PATH
 
-include(clang)
+#include(clang)
 
 if(CLANG_VERSION)
     if(${CLANG_VERSION} VERSION_LESS 3)

@@ -1,1 +1,4 @@
-.idea/*
+.idea/
+third_party/
+bin/
+\.vs/

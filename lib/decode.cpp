@@ -3,6 +3,7 @@
 #include <map>
 #include <algorithm>
 #include <ciso646>
+#include <stdexcept>
 
 namespace roman_numerals {
 

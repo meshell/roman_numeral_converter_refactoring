@@ -18,7 +18,7 @@ endif(NOT PROJECT_NAME)
 # set the path to the additional cmake modules
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../cmake)
 
-include(clang)
+#include(clang)
 
 # Build library
 add_library(roman_converter_lib STATIC

@@ -25,7 +25,7 @@ file(MAKE_DIRECTORY
     ${RUNTIME_OUTPUT_DIRECTORY}
     )
 
-include(clang)
+#include(clang)
 
 # tests
 enable_testing(true)
