@@ -6,9 +6,9 @@
 
 namespace roman_numerals {
 
-class RomanEncoder final: public IEncoder{
+class RomanEncoder: public IEncoder{
 public:
-    std::string encode(uint32_t arabic) final;
+    std::string encode(unsigned int arabic);
 };
 
 } // namespace roman_numerals

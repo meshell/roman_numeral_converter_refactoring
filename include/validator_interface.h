@@ -6,7 +6,7 @@
 class IValidator{
 public:
     virtual bool is_valid(const std::string&) = 0;
-    virtual ~IValidator() = default;
+    virtual ~IValidator() {};
 
 };
 

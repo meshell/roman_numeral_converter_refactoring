@@ -5,9 +5,9 @@
 #include <string>
 
 namespace roman_numerals {
-class RomanNumberValidator final: public IValidator {
+class RomanNumberValidator: public IValidator {
 public:
-    bool is_valid(const std::string& roman) final;
+    bool is_valid(const std::string& roman);
 };
 
 

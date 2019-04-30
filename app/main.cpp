@@ -1,7 +1,6 @@
 #include "roman_numerals_version.h"
 #include "roman_encoder/encode.h"
 #include "roman_decoder/decode.h"
-#include "roman_validator/validator.h"
 #include <ciso646>
 
 #ifdef USE_BOOST
@@ -17,32 +16,16 @@
 #include <iostream>
 
 
-class RomanEnDecoder
+struct RomanEnDecoder: 
+    public roman_numerals::RomanDecoder, 
+    public roman_numerals::RomanEncoder
 {
-public:
-    RomanEnDecoder(std::unique_ptr<IEncoder> encoder, std::unique_ptr<IDecoder> decoder)
-            : m_encoder{std::move(encoder)}
-            , m_decoder{std::move(decoder)}
-    {
-    }
-
-    uint32_t decode(const std::string &roman) {
-        return m_decoder->decode(roman);
-    }
-
-    std::string encode(uint32_t arabic) {
-        return m_encoder->encode(arabic);
-    }
-
-private:
-    std::unique_ptr<IEncoder> m_encoder;
-    std::unique_ptr<IDecoder> m_decoder;
 };
 
 int main(int argc, char** argv) {
 
     std::string roman_number{};
-    uint32_t arabic_number = 5000u;
+    unsigned arabic_number = 5000;
 
 #ifndef USE_BOOST
     int opt;
@@ -110,17 +93,14 @@ int main(int argc, char** argv) {
 
     if (variable_map.count("roman") == 0 && variable_map.count("arabic") == 0) {
         std::cout << "Specify at least one of roman or arabic roman=" << roman_number << "\n";
-        std::cout << option_description << std::endl;
+        std::cout << option_description << "\n";
         return 1;
     }
 #endif
-    auto roman_encoder = std::unique_ptr<IEncoder>{new roman_numerals::RomanEncoder{}};
-    auto roman_validator = std::unique_ptr<IValidator>{new roman_numerals::RomanNumberValidator{}};
-    auto roman_decoder = std::unique_ptr<IDecoder>{new roman_numerals::RomanDecoder{std::move(roman_validator)}};
-    auto romand_coder = RomanEnDecoder{std::move(roman_encoder), std::move(roman_decoder)};
+    RomanEnDecoder roman_endecoder;
     try {
         if ((not roman_number.empty()) && (arabic_number <= 4000u)) {
-            const auto arabic_result = romand_coder.decode(roman_number);
+            const unsigned arabic_result = roman_endecoder.decode(roman_number);
             std::cout << "'" << roman_number
                       << "' is "
                       << (arabic_result == arabic_number ? "" : "not ")
@@ -129,7 +109,7 @@ int main(int argc, char** argv) {
                       << ")\n";
         } else if (not roman_number.empty()) {
 
-            const auto arabic_result = romand_coder.decode(roman_number);
+            const unsigned arabic_result = roman_endecoder.decode(roman_number);
             std::cout << "'" << roman_number
                       << "' is "
                       << std::to_string(arabic_result)
@@ -137,7 +117,7 @@ int main(int argc, char** argv) {
         } else if (arabic_number <= 4000u) {
             std::cout << std::to_string(arabic_number)
                       << " is '"
-                      <<romand_coder.encode(arabic_number)
+                      << roman_endecoder.encode(arabic_number)
                       << "'\n";
         }
 

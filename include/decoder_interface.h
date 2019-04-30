@@ -5,8 +5,8 @@
 
 class IDecoder {
 public:
-    virtual uint32_t decode(const std::string&) = 0;
-    virtual ~IDecoder() = default;
+    virtual unsigned int decode(std::string const &) = 0;
+    virtual ~IDecoder() {};
 };
 
 #endif //IDECODER_H_

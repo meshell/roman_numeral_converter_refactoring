@@ -7,8 +7,8 @@
 
 namespace roman_numerals {
 
-uint32_t RomanDecoder::decode(const std::string &roman) {
-    const std::map<char, uint32_t> to_arabic_mapping =
+    unsigned int RomanDecoder::decode(std::string const & roman) {
+    const std::map<char, unsigned int> to_arabic_mapping =
             {
                     {'M', 1000},
                     {'D', 500},
@@ -21,7 +21,7 @@ uint32_t RomanDecoder::decode(const std::string &roman) {
 
     auto arabic = 0u;
     auto prev = 0u;
-    if (not m_validator->is_valid(roman)) {
+    if (not is_valid(roman)) {
         throw std::invalid_argument{"Invalid string provided"};
     }
 

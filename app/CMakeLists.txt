@@ -68,7 +68,7 @@ endif(NOT MSVC)
 
 target_compile_options(${PROJECT_NAME}
     PRIVATE
-    $<$<BOOL:${MSVC}>:/analyze;/W4>
+    $<$<BOOL:${MSVC}>:/analyze>
     )
 
 target_compile_definitions(${PROJECT_NAME}

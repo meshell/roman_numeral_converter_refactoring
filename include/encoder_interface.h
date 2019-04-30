@@ -5,8 +5,8 @@
 
 class IEncoder{
 public:
-    virtual std::string encode(uint32_t ) = 0;
-    virtual ~IEncoder() = default;
+    virtual std::string encode(unsigned int ) = 0;
+    virtual ~IEncoder() {};
 
 };
 

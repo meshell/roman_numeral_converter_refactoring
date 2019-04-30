@@ -73,7 +73,7 @@ endif(NOT MSVC)
 
 target_compile_options(roman_converter_unittests
     PRIVATE
-    $<$<BOOL:${MSVC}>:/analyze;/W4>
+    $<$<BOOL:${MSVC}>:/analyze>
     )
 
 target_compile_definitions(roman_converter_unittests

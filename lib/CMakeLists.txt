@@ -50,7 +50,7 @@ endif(NOT MSVC)
 
 target_compile_options(roman_converter_lib
     PRIVATE
-    $<$<BOOL:${MSVC}>:/analyze;/W4>
+    $<$<BOOL:${MSVC}>:/analyze>
     )
 
 if(CLANG_TIDY_EXE AND NOT CMAKE_COMPILER_IS_GNUCXX)
